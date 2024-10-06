@@ -12,8 +12,8 @@ def Heatmap(data_obj):
     """
     data_obj.df.Non_Categorical_Variables = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
     fig = plt.figure(figsize=(16, 6))
-    sns.heatmap(data_obj.df.Non_Categorical_Variables.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
-    return st.pyplot(fig)
+    sns.heatmap((data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight).corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    st.pyplot(fig)
     
 def main(data_obj):
     """Data Visualization main
