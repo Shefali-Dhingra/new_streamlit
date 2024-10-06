@@ -5,7 +5,7 @@ from io import StringIO #to read data files as .csv correctly
 import os #to work with files
 
 # Streamlit main page configuration
-st.set_page_config(page_title="MAIT 21/22 Data Analytics Dashboard",
+st.set_page_config(page_title="DEVP Dashboard",
                     page_icon=None,
                     layout="wide",
                     initial_sidebar_state="expanded",
@@ -20,27 +20,10 @@ class DataObject():
     """
     Data object class holds a dataframe and its byte size.
     """
-    def __init__(self, df=None, filesize=None):
-      """The constructor for DataObject class
-
-      :param df: pandas dataframe object, defaults to None
-      :type df: pandas.core.frame.DataFrame, optional
-      :param filesize: byte size of pandas dataframe, defaults to None
-      :type filesize: numpy.int32, optional
-      """
-      self.df = df
-      self.filesize = filesize
 
 
 # Interface class        
 class Interface():
-    """
-    Interface class contains a file picker and a side bar. It also handles the import of a data object.
-    """
-    def __init__(self):
-      """The constructor for Interface class.
-      """
-      pass
     
     def side_bar(cls, dt_obj):
       """Sidebar configuration and file picker
