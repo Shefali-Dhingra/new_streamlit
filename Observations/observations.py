@@ -5,8 +5,9 @@ def main():
     """Observations main
     """    
     st.header("OBSERVATIONS")
+    st.subheader("Non-Categorical Variables Analysis")
+    
     st.markdown("""
-    1. **From Non-Categorical Variables, we observed the following:**
     - Symmetry: Both Quantity and Value show a relatively symmetric distribution, with their mean and median being close.
     - Variability: There is considerable variability in all three variables, as indicated by the standard deviations and the range between minimum and maximum values.
     - Skewness: Given that the minimum values are much lower and the maximum values are quite high, these variables could be slightly positively skewed, with a few higher values pulling the mean above the median.
@@ -18,13 +19,13 @@ def main():
     - Confidence in the Mean: The narrow confidence intervals suggest that, despite the variability, the estimates for the mean of each variable are fairly precise.
     - Weight's Higher Variability: While the confidence interval for weight is wider than those for quantity and value, the overall variability in weight reflects that the traded goods may have a more diverse range of weights compared to their quantities or values.
     - The variables are largely independent, with no evidence of strong direct causal relationships based on the correlation matrix.
+
+    """)
     
-  2. **For Categorical Variables, the observations were as follows:**
-    - Frequency: The dataset is perfectly sampled with a 0.51:0.49 ratio of Import_Export values.
-    - The no. of Imports in the sample is more than no. of Exports, but sice their frquencies are comparable, they dont have much difference between no. of values
-    
-  3. **Trade Trend Analysis observations:**
-  - **Top Importing Countries: ** Jamaica, Congo, New Zealand, Belarus, Hungary, Wallis and Futuna, Central African Republic, Guinea -Bissau, Anguilla, Russian Federation are top 10 importing Countries
+   st.subheader("Trade Trend Analysis")
+
+   st.markdown("""
+    - Top Importing Countries: Jamaica, Congo and New Zealand are top importing Countries
     - Top Exporting Countries: India, Congo, and Maldives are among the countries exporting the highest value of goods.
     - Top Exported Products: Onto, Now, and Mr are the top exported products. Although Onto generates the most wealth for its suppliers, Now is not among the top 10 wealth-generating products for the country, and Mr is ranked 8th.
     - Top Imported Products: Explain, Strong, and Focus were the top imported products.
