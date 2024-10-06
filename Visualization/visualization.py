@@ -4,23 +4,14 @@ import streamlit as st #streamlit backend
 # Visualization import section
 import seaborn as sns #for plotting
 import matplotlib.pyplot as plt #to configure plots
-
-def Heatmap(data_obj):
-    """Heatmap
-
-    :param data_obj: DataObject instance
-    :type data_obj: __main__.DataObject
-    """
-    fig = plt.figure(figsize=(16, 6))
-    sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
-    st.pyplot(fig)
     
 def main(data_obj):
-    """Data Preview main
+    """Visualization main
 
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
+    
     st.header("DATA VISUALIZATION")
     col1, col2 = st.columns(2)
     col3, col4 = st.columns(2)
@@ -40,7 +31,7 @@ def main(data_obj):
         
     with col4:
         st.subheader("Correlation Heatmap")
-        st.dataframe(Heatmap(data_obj))
+        st.pyplot(sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12))
 
 # Main
 if __name__ == "__main__":
