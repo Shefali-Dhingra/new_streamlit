@@ -18,7 +18,8 @@ def main(data_obj):
         
     with col2:
         st.subheader("Dataframe description")
-        st.dataframe(data_obj.df.describe())
+        Non_Categorical_Variables=data_obj.df['Quantity','Value','Weight']
+        st.dataframe(Non_Categorical_Variables.describe())
     
     with col3:
         st.subheader("Data types")
@@ -27,13 +28,11 @@ def main(data_obj):
     with col4:
         st.subheader("Data Info")
         st.markdown("""
-                1. **Index Variables:**  You can have a look at your dataset in general and spot some correlations between the features
-                2. **Data Preparation:** Drop and/or rename single/multiple columns, don't forget to submit changes
-                3. **Smoothing and Filtering:** Use a multitude of tools to trim or adjust your data to increase its quality. Don't forget to save and finalize the results! Even if you didn't change anything :)
-                4. **Classification:** You can perform several classification methods (e.g. Random Forest) and get results as visualization and datasheet.  
-                5. **Regression:** Predict the next data points using Neural Networks, Random Forest and other algorithms
+                1. **Index Variables:**  Transaction ID and Invoice Number
+                2. **Nominal Variables:** Country,Product,Import Export, Category,Port,Shipping_Method,Supplier,Customer and Customs Code
+                3. **Ordinal Variables:** Payment Terms
+                4. **Non-Categorical Variables:** Quantity, Value and Weight
                 """)
-        
 
 # Main
 if __name__ == "__main__":
