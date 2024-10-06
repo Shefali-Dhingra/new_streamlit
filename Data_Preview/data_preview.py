@@ -7,7 +7,7 @@ def main(data_obj):
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
-    st.header("DATA PREVIEW")
+    st.header("DATA INFORMATION")
     col1, col2 = st.columns(2)
     col3, col4 = st.columns(2)
     
