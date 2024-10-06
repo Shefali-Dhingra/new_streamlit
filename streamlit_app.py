@@ -39,7 +39,18 @@ class Interface():
       dt_obj.df = pd.DataFrame.sample(dt_obj.data, n=3001, random_state=55043)
       dt_obj.filesize = dt_obj.df.size
       dt_obj.Non_Categorical_Variables=dt_obj.df.Quantity+dt_obj.df.Value+dt_obj.df.Weight
-      
+      def show_heat_map(self):
+        st.title('Heat Map of Trade Data')
+        
+        # Compute correlation matrix
+        corr = self.dt_obj.df.corr()
+        
+        # Display the correlation matrix using Seaborn heatmap
+        fig, ax = plt.subplots(figsize=(10, 8))
+        sns.heatmap(corr, annot=True, fmt='.2f', cmap='coolwarm', ax=ax)
+        
+        # Show the plot in Streamlit
+        st.pyplot(fig)
         # Side bar navigation menu with a select box
       menu = ['Welcome Page','Data Preview','Data Visualization']
       navigation = st.sidebar.selectbox(label="Select menu", options=menu)
@@ -51,9 +62,7 @@ class Interface():
 
       elif navigation == 'Data Visualization':
         with st.container():
-          fig = plt.figure(figsize=(16, 6))
-          sns.heatmap(dt_obj.Non_Categorical_Variables.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
-          st.pyplot(fig)
+          self.show_heat_map()
           
       else:
         Welcome_Page.welcome()
