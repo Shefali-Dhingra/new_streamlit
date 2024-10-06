@@ -38,7 +38,7 @@ class Interface():
       # Data Sampling
       dt_obj.df = pd.DataFrame.sample(dt_obj.data, n=3001, random_state=55043)
       dt_obj.filesize = dt_obj.df.size
-      dt_obj.Non_Categorical_Variables=dt_obj.df['Quantity','Value','Weight']
+      dt_obj.Non_Categorical_Variables=dt_obj.df.Quantity
       
         # Side bar navigation menu with a select box
       menu = ['Welcome Page','Data Preview','Data Visualization']
