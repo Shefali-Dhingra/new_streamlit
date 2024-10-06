@@ -50,10 +50,7 @@ class Interface():
 
       elif navigation == 'Data Visualization':
         with st.container():
-         def Heatmap(dt_obj):
-           fig = plt.figure(figsize=(16, 6))
-           sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
-           st.pyplot(fig)
+          Data_Visualization.data_visualization(dt_obj)
           
       else:
         Welcome_Page.welcome()
