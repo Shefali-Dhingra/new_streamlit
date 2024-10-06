@@ -12,7 +12,7 @@ def top_countries_by_trade(data, trade_type):
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Country')
     st.pyplot(fig)
-    
+
 def top_products_by_trade(data, trade_type):
     filtered_data = data[data['Import_Export'] == trade_type]
     top_products = filtered_data.groupby('Product')['Total_Value'].sum().nlargest(10)
@@ -42,19 +42,25 @@ def shipping_vs_value(data, trade_type):
     ax.set_ylabel('Weight (Shipping Cost Proxy)')
     st.pyplot(fig)
 
-def top_suppliers_by_exports(data,trade_type):
-
+def top_suppliers_by_exports(data, trade_type):
     filtered_data = data[data['Import_Export'] == trade_type]
+    if filtered_data.empty:
+        st.warning(f"No data available for {trade_type}.")
+        return
+    
     top_suppliers = filtered_data.groupby('Supplier')['Total_Value'].sum().nlargest(10)
+    if top_suppliers.empty:
+        st.warning(f"No suppliers found for {trade_type}.")
+        return
+    
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_suppliers.plot(kind='bar', color='light blue', ax=ax)
+    top_suppliers.plot(kind='bar', color='#ADD8E6', ax=ax)  # Change to hex color
     ax.set_title(f'Top 10 Global Suppliers by {trade_type} Wealth', fontsize=14)
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Supplier')
     st.pyplot(fig)
 
 def preferred_payment_methods(data, trade_type):
-    
     filtered_data = data[data['Import_Export'] == trade_type]
     payment_methods = filtered_data['Payment_Terms'].value_counts().nlargest(5)
     fig, ax = plt.subplots(figsize=(6, 6))
