@@ -25,7 +25,7 @@ def main(data_obj):
         st.dataframe(data_obj.df.dtypes.astype(str))
         
     with col4:
-        st.subheader("Data Info")
+        st.subheader("Catagorical and Non-Categorical Variables")
         st.markdown("""
                 1. **Index Variables:**  Transaction ID and Invoice Number
                 2. **Nominal Variables:** Country,Product,Import Export, Category,Port,Shipping_Method,Supplier,Customer and Customs Code
