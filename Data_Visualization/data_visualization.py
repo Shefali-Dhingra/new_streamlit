@@ -23,7 +23,7 @@ def main(data_obj):
 
     # Correlation matrix
     st.subheader("Correlation heatmap")
-    Heatmap(data_obj.df)
+    Heatmap(data_obj)
 
 # Main
 if __name__ == "__main__":
