@@ -33,32 +33,32 @@ def yearly_trade_volume(data):
     ax.set_ylabel('Quantity')
     st.pyplot(fig)
 
-def shipping_vs_value(data, import_export):
-    filtered_data = data[data['Import_Export'] == import_export]
+def shipping_vs_value(data, trade_type):
+    filtered_data = data[data['Import_Export'] == trade_type]
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.scatterplot(data=filtered_data, x='Total_Value', y='Weight', hue='Shipping_Method', ax=ax)
-    ax.set_title(f'Shipping Costs vs Product Value ({import_export}s)', fontsize=14)
+    ax.set_title(f'Shipping Costs vs Product Value', fontsize=14)
     ax.set_xlabel('Product Value')
     ax.set_ylabel('Weight (Shipping Cost Proxy)')
     st.pyplot(fig)
 
-def top_suppliers_by_exports(data,import_export):
+def top_suppliers_by_exports(data,trade_type):
 
     filtered_data = data[data['Import_Export'] == trade_type]
     top_suppliers = filtered_data.groupby('Supplier')['Total_Value'].sum().nlargest(10)
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_suppliers.plot(kind='bar', color='#light blue', ax=ax)
+    top_suppliers.plot(kind='bar', color='light blue', ax=ax)
     ax.set_title(f'Top 10 Global Suppliers by {trade_type} Wealth', fontsize=14)
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Supplier')
     st.pyplot(fig)
 
-def preferred_payment_methods(data, import_export):
-    filtered_data = data[data['Import_Export'] == import_export]
+def preferred_payment_methods(data, trade_type):
+    filtered_data = data[data['Import_Export'] == trade_type]
     payment_methods = filtered_data['Payment_Terms'].value_counts().nlargest(5)
     fig, ax = plt.subplots(figsize=(6, 6))
     payment_methods.plot(kind='pie', autopct='%1.1f%%', colors=sns.color_palette('Pastel1'), ax=ax)
-    ax.set_title(f'Preferred Payment Methods for {import_export}s', fontsize=14)
+    ax.set_title(f'Preferred Payment Methods for {trade_type}s', fontsize=14)
     ax.set_ylabel('')
     st.pyplot(fig)
 
