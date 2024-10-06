@@ -43,12 +43,11 @@ def shipping_vs_value(data, import_export):
     st.pyplot(fig)
 
 def top_suppliers_by_exports(data):
-    top_suppliers = data[data['Import_Export'] == 'Export'].groupby('Supplier')['Total_Value'].sum().nlargest(10)
+    top_suppliers = data[data['Import_Export'] == 'Export'].groupby('Supplier')['Value'].sum().nlargest(10)
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_suppliers.plot(kind='hist', bins=5, color='green', ax=ax)
+    top_suppliers.plot(kind='bar', color='green', ax=ax)
     ax.set_title('Top 10 Global Suppliers by Wealth Generated (Exports)', fontsize=14)
-    ax.set_xlabel('Total Export Value')
-    ax.set_ylabel('Frequency')
+    ax.set_ylabel('Total Export Value')
     st.pyplot(fig)
 
 def preferred_payment_methods(data, import_export):
