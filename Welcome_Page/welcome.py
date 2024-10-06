@@ -5,6 +5,7 @@ def main():
     """Welcome main
     """    
     st.header("Welcome to Trend Analysis Dashboard!")
+    st.subheader("A Random Sample of 3001 entries is taken with randome state 55043")
     st.info("""This Dashboard is Developed by Shefali Dhingra, A student of FORE School of Management for a project in DEVP""")
     st.subheader("Navigation")
     st.markdown("""
