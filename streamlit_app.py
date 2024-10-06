@@ -14,7 +14,6 @@ st.set_page_config(page_title="DEVP Dashboard",
 # App import
 import Welcome_Page
 import Data_Preview
-import Visualization
 
 # Data object class
 class DataObject():
@@ -47,9 +46,9 @@ class Interface():
          Data_Preview.data_preview(dt_obj)
 
         # Runs 'Data Preparation' app
-      if navigation == 'Data Visualization':
-        with st.container():
-         Visualization.visualization(dt_obj)
+      # if navigation == 'Data Visualization':
+      #   with st.container():
+      #    Visualization.visualization(dt_obj)
       
       # Initial welcome page when there is no file selected
       else:
