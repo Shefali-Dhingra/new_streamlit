@@ -54,11 +54,12 @@ def top_suppliers_by_exports(data,trade_type):
     st.pyplot(fig)
 
 def preferred_payment_methods(data, trade_type):
+    
     filtered_data = data[data['Import_Export'] == trade_type]
     payment_methods = filtered_data['Payment_Terms'].value_counts().nlargest(5)
     fig, ax = plt.subplots(figsize=(6, 6))
     payment_methods.plot(kind='pie', autopct='%1.1f%%', colors=sns.color_palette('Pastel1'), ax=ax)
-    ax.set_title(f'Preferred Payment Methods for {trade_type}s', fontsize=14)
+    ax.set_title(f'Preferred Payment Methods for {trade_type}', fontsize=14)
     ax.set_ylabel('')
     st.pyplot(fig)
 
@@ -78,11 +79,11 @@ def main(data_obj):
     with col3:
         yearly_trade_volume(data_obj.df)
     with col4:
-        shipping_vs_value(data_obj.df, 'Import')
+        shipping_vs_value(data_obj.df, trade_type)
     with col5:
-        top_suppliers_by_exports(data_obj.df)
+        top_suppliers_by_exports(data_obj.df, trade_type)
     with col6:
-        preferred_payment_methods(data_obj.df, 'Export')
+        preferred_payment_methods(data_obj.df, trade_type)
 
 # Main execution block
 if __name__ == "__main__":
