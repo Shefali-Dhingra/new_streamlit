@@ -26,7 +26,7 @@ def main(data_obj):
         
     with col4:
         st.subheader("Data Info")
-        st.dataframe(data_obj.df.info())
+        st.dataframe(data_obj.df.info)
         
 
 # Main
