@@ -7,7 +7,7 @@ def top_countries_by_trade(data, trade_type):
     filtered_data = data[data['Import_Export'] == trade_type]
     top_countries = filtered_data.groupby('Country')['Total_Value'].sum().nlargest(10)
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_countries.plot(kind='bar', color='light blue', ax=ax)
+    top_countries.plot(kind='bar', color='#2977B7', ax=ax)
     ax.set_title(f'Top 10 Countries by {trade_type} Value', fontsize=14)
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Country')
@@ -17,7 +17,7 @@ def top_products_by_trade(data, trade_type):
     filtered_data = data[data['Import_Export'] == trade_type]
     top_products = filtered_data.groupby('Product')['Total_Value'].sum().nlargest(10)
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_products.plot(kind='bar', color='light orange', ax=ax)
+    top_products.plot(kind='bar', color='#EDA946', ax=ax)
     ax.set_title(f'Top 10 Products by {trade_type} Value', fontsize=14)
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Products')
