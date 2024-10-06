@@ -3,6 +3,8 @@ import pandas as pd #to work with dataframes
 import streamlit as st #streamlit backend
 from io import StringIO #to read data files as .csv correctly
 import os #to work with files
+import seaborn as sns #for plotting
+import matplotlib.pyplot as plt #to configure plots
 
 # Streamlit main page configuration
 st.set_page_config(page_title="DEVP Dashboard",
@@ -48,7 +50,10 @@ class Interface():
 
       elif navigation == 'Data Visualization':
         with st.container():
-         Data_Visualization.data_visualization(dt_obj)
+         def Heatmap(dt_obj):
+           fig = plt.figure(figsize=(16, 6))
+           sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+           st.pyplot(fig)
           
       else:
         Welcome_Page.welcome()
