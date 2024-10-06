@@ -31,7 +31,7 @@ def main(data_obj):
         
     with col4:
         st.subheader("Correlation Heatmap")
-        st.pyplot(sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12))
+        st.dataframe(data_obj.df.corr())
 
 # Main
 if __name__ == "__main__":
