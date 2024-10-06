@@ -3,14 +3,16 @@ import streamlit as st #streamlit backend
 import seaborn as sns #for plotting
 import matplotlib.pyplot as plt #to configure plots
 
+
 def Heatmap(data_obj):
     """Heatmap
 
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
+    data_obj.df.Non_Categorical_Variables = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
     fig = plt.figure(figsize=(16, 6))
-    sns.heatmap(data_obj.Non_Categorical_Variables.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    sns.heatmap(data_obj.df.Non_Categorical_Variables.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
     return st.pyplot(fig)
     
 def main(data_obj):
@@ -19,6 +21,7 @@ def main(data_obj):
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
+    data_obj.df.Non_Categorical_Variables = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
     st.header("DATA VISUALIZATION")
     col1, col2 = st.columns(2)
     col3, col4 = st.columns(2)
@@ -37,7 +40,7 @@ def main(data_obj):
         
     with col4:
         st.subheader("Correlation heatmap")
-        Heatmap(data_obj)
+        
 
 # Main
 if __name__ == "__main__":
