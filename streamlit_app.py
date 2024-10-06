@@ -31,27 +31,26 @@ class Interface():
       :param dt_obj: pandas dataframe object
       :type dt_obj: pandas.core.frame.DataFrame
       """
-            #now the standard 'read_csv' should work
-        dt_obj.data = pd.read_csv("import_export_15000", sep=';', decimal=',', index_col = False)
-        # Data Sampling
-        dt_obj.df = pd.DataFrame.sample(dt_obj.data, n=3001, random_state=55043)
-        dt_obj.filesize = dt_obj.df.size
+      dt_obj.data = pd.read_csv("import_export_15000", sep=';', decimal=',', index_col = False)
+      # Data Sampling
+      dt_obj.df = pd.DataFrame.sample(dt_obj.data, n=3001, random_state=55043)
+      dt_obj.filesize = dt_obj.df.size
       
         # Side bar navigation menu with a select box
-        menu = ['Welcome Page','Data Preview']
-        navigation = st.sidebar.selectbox(label="Select menu", options=menu)
+      menu = ['Welcome Page','Data Preview']
+      navigation = st.sidebar.selectbox(label="Select menu", options=menu)
 
         # Apps
 
         # Landing page
-        if navigation == 'Welcome Page':
-          with st.container():
-           Welcome_Page.welcome()
+      if navigation == 'Welcome Page':
+        with st.container():
+         Welcome_Page.welcome()
 
         # Runs 'Data Preview' app
-        if navigation == 'Data Preview':
-          with st.container():
-           Data_Preview.data_preview(dt_obj)
+      if navigation == 'Data Preview':
+        with st.container():
+         Data_Preview.data_preview(dt_obj)
 
         # Runs 'Data Preparation' app
         # if navigation == 'Data Preparation':
@@ -61,8 +60,7 @@ class Interface():
       # Initial welcome page when there is no file selected
       else:
         Welcome_Page.welcome()
-        # It deletes Preprocessing and initial datasets from the last run
-
+        
 def main():
   """
   Main and its Streamlit configuration
