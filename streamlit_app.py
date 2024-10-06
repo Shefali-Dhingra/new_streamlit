@@ -14,10 +14,6 @@ st.set_page_config(page_title="MAIT 21/22 Data Analytics Dashboard",
 # App import
 import Welcome_Page
 import Data_Preview
-import Data_Preparation
-import Smoothing_and_Filtering
-import Regression
-import Classification
 
 # Data object class
 class DataObject():
@@ -68,8 +64,7 @@ class Interface():
             dt_obj.filesize = dt_obj.df.size
       
         # Side bar navigation menu with a select box
-        menu = ['Welcome Page','Data Preview', 'Data Preparation', 'Smoothing and filtering',
-                                                 'Classification', 'Regression']
+        menu = ['Welcome Page','Data Preview']
         navigation = st.sidebar.selectbox(label="Select menu", options=menu)
 
         # Apps
@@ -85,30 +80,14 @@ class Interface():
            Data_Preview.data_preview(dt_obj)
 
         # Runs 'Data Preparation' app
-        if navigation == 'Data Preparation':
-          with st.container():
-           Data_Preparation.data_prep(dt_obj)
-
-        # Runs 'Smoothing and filtering' app
-        if navigation == 'Smoothing and filtering':
-          Smoothing_and_Filtering.smoothing_and_filtering(dt_obj)
-        
-        # Runs 'Classification' app
-        if navigation == 'Classification':
-          Classification.classification(dt_obj)  
-
-        # Runs 'Regression' app
-        if navigation == 'Regression':
-          Regression.regression(dt_obj)
+        # if navigation == 'Data Preparation':
+        #   with st.container():
+        #    Data_Preparation.data_prep(dt_obj)
       
       # Initial welcome page when there is no file selected
       else:
         Welcome_Page.welcome()
         # It deletes Preprocessing and initial datasets from the last run
-        if os.path.isfile("Smoothing_and_Filtering//Preprocessing dataset.csv"):
-           os.remove("Smoothing_and_Filtering//Preprocessing dataset.csv")
-        if os.path.isfile("Smoothing_and_Filtering//initial.csv"):
-           os.remove("Smoothing_and_Filtering//initial.csv")
 
 def main():
   """
