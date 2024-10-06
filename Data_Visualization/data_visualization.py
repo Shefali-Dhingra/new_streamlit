@@ -33,7 +33,13 @@ def top_products_by_trade(data):
 
 # Plot 3: Yearly Trade Volume (2019-2024)
 def yearly_trade_volume(data):
-    data['Year'] = pd.to_datetime(data['Date']).dt.year
+    # Convert Date to datetime with error handling
+    data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
+    data['Year'] = data['Date'].dt.year
+    
+    # Remove rows where Year is NaN
+    data = data.dropna(subset=['Year'])
+
     yearly_export = data[data['Import_Export'] == 'Export'].groupby('Year')['Quantity'].sum()
     yearly_import = data[data['Import_Export'] == 'Import'].groupby('Year')['Quantity'].sum()
     
