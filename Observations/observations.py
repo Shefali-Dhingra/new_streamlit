@@ -14,24 +14,26 @@ def main():
     - Range values confirm that the data has a very wide spread, indicating diverse transaction sizes.
     - Symmetry: All three variables have very low skewness, indicating their distributions are quite symmetric.
     - Flat Distributions: The negative kurtosis values for all three variables suggest that the distributions are flatter than normal, with fewer outliers.
-    - Moderate Relative Variability: All Non-Categorical variables exhibit a moderate degree of relative variability, with CV values **above 55%**. This indicates that while there is variation in the data, it’s not extreme.
+    - Moderate Relative Variability: All Non-Categorical variables exhibit a moderate degree of relative variability, with CV values above 55%. This indicates that while there is variation in the data, it’s not extreme.
     - Confidence in the Mean: The narrow confidence intervals suggest that, despite the variability, the estimates for the mean of each variable are fairly precise.
     - Weight's Higher Variability: While the confidence interval for weight is wider than those for quantity and value, the overall variability in weight reflects that the traded goods may have a more diverse range of weights compared to their quantities or values.
     - The variables are largely independent, with no evidence of strong direct causal relationships based on the correlation matrix.
 
     2. **Trade Trend Analysis**
-    - Top Importing Countries: Jamaica, Congo and New Zealand are top importing Countries
-    - Top Exporting Countries: India, Congo, and Maldives are among the countries exporting the highest value of goods.
-    - Top Exported Products: Onto, Now, and Mr are the top exported products. Although Onto generates the most wealth for its suppliers, Now is not among the top 10 wealth-generating products for the country, and Mr is ranked 8th.
-    - Top Imported Products: Explain, Strong, and Focus were the top imported products.
-    - 2021 was the year with the maximum imported products, and 2019 had the minimum exported products. One probable cause could be COVID-19.
+    - Top Importing Countries: Jamaica, Congo and New Zealand are top importing Countries based on value of Imports.
+    - Top Exporting Countries: Madagascar, Kiribati and Bangladesh are among the countries exporting the highest value of goods.
+    - Top Exported Products: Bad, Church and Site are the top exported products
+    - Top Imported Products: Clear, Change and Value were the top imported products.
+    - 2020 was the year with the maximum imported products, and 2022 had the maximum exported products. 
+    - Both Imports and Exports were lowest in 2019. One probable cause could be COVID-19.
     - August 2018 was the month with the highest volume of imports.
-    - Highest Valued Goods Imported in Countries: Bahrain, Brazil, and Belarus.
-    - Highest Valued Goods Exported from Countries: India, Congo, and Maldives.
-    - Top Suppliers: Wright Group and Brown PLC are the leading suppliers, contributing the most in terms of total value of exported goods.
-    - Trade Balance: A positive trade balance was observed for countries that export more than they import, and vice versa for countries with a negative trade balance. Bahrain has the largest trade balance gap, indicating a focus on exports.
-    - Average Trade Value per Transaction was **$5057.81**.
-    - Maximum Average value per product is for the product **need**
-    - Preferred Payment Terms: Cash on Delivery is the most preferred payment term in Bahrain, while countries like India favor Net 30 terms.
-    - Time Between Orders: The average time between orders is approximately 1.85 days for exports and 1.80 days for imports, indicating similar purchasing patterns. 
+    - Highest Valued Goods Imported in Countries: Jamaica, Congo and New Zealand
+    - Highest Valued Goods Exported from Countries: Madagascar, Kiribati and Bangladesh
+    - Top Suppliers: Johnson PLC and Smith PLC are the leading suppliers, contributing the most in terms of total value of exported goods.
+    - Trade Balance: A positive trade balance was observed for countries that export more than they import, and vice versa for countries with a negative trade balance.
+    - Average Trade Value per Transaction was $5030.32
+    - Preferred Payment Terms (Imports): All Payment Methods have similar Ratios indicating that each Payment Method is equally preffered
+    - Preferred Payment Terms (Exports): All Payment Methods have similar Ratios indicating that each Payment Method is equally preffered
+    - Shipping Cost: The weight (shipping cost proxy) is quite spread out, with values ranging from 0 to 5000, but there is a slight increase in density around certain weight levels like 2000 to 4000.
+    - Lack of Correlation: There doesn't seem to be a strong correlation between product value and shipping cost proxy. Higher product value doesn’t consistently align with higher shipping costs.
                 """)
