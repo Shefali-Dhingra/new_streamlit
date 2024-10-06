@@ -26,7 +26,13 @@ def main(data_obj):
         
     with col4:
         st.subheader("Data Info")
-        st.dataframe(data_obj.df.info)
+        st.markdown("""
+                1. **Index Variables:**  You can have a look at your dataset in general and spot some correlations between the features
+                2. **Data Preparation:** Drop and/or rename single/multiple columns, don't forget to submit changes
+                3. **Smoothing and Filtering:** Use a multitude of tools to trim or adjust your data to increase its quality. Don't forget to save and finalize the results! Even if you didn't change anything :)
+                4. **Classification:** You can perform several classification methods (e.g. Random Forest) and get results as visualization and datasheet.  
+                5. **Regression:** Predict the next data points using Neural Networks, Random Forest and other algorithms
+                """)
         
 
 # Main
