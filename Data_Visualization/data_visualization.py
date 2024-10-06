@@ -4,15 +4,14 @@ import seaborn as sns #for plotting
 import matplotlib.pyplot as plt #to configure plots
 
 
-def Heatmap(data_obj):
+def Heatmap(non_cat):
     """Heatmap
 
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
-    data_obj.df.Non_Categorical_Variables = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
     fig = plt.figure(figsize=(16, 6))
-    sns.heatmap((data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight).corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    sns.heatmap(non_cat.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
     st.pyplot(fig)
     
 def main(data_obj):
@@ -21,14 +20,14 @@ def main(data_obj):
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
-    data_obj.df.Non_Categorical_Variables = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
+    non_cat = data_obj.df.Quantity+data_obj.df.Value+data_obj.df.Weight
     st.header("DATA VISUALIZATION")
     col1, col2 = st.columns(2)
     col3, col4 = st.columns(2)
     
     with col1:
         st.subheader("Correlation heatmap")
-        Heatmap(data_obj)
+        Heatmap(non_cat)
         
     with col2:
         st.subheader("Dataframe description")
