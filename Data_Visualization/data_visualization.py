@@ -54,7 +54,7 @@ def top_suppliers_by_exports(data, trade_type):
         return
     
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_suppliers.plot(kind='bar', color='#ADD8E6', ax=ax)  # Change to hex color
+    top_suppliers.plot(kind='bar', color='#ADD8E6', ax=ax) 
     ax.set_title(f'Top 10 Global Suppliers by {trade_type} Wealth', fontsize=14)
     ax.set_ylabel('Total Value of Trade')
     ax.set_xlabel('Supplier')
