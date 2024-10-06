@@ -49,7 +49,7 @@ class Interface():
         # Runs 'Data Preparation' app
       if navigation == 'Data Visualization':
         with st.container():
-         Visualization.data_visualization(dt_obj)
+         Visualization.visualization(dt_obj)
       
       # Initial welcome page when there is no file selected
       else:
