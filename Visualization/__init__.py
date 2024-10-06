@@ -1,1 +1,1 @@
-from .visualization import main as data_visualization
+from .visualization import main as visualization
