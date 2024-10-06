@@ -48,20 +48,11 @@ class Interface():
       :param dt_obj: pandas dataframe object
       :type dt_obj: pandas.core.frame.DataFrame
       """
-      # Accepts .csv and .data
-      filename = st.sidebar.file_uploader("Upload a data file", type=(["csv", "data"]))                   
-      if filename is not None: #file uploader selected a file      
-        try: #most datasets can be read using standard 'read_csv'                                                                                           
-            dt_obj.df = pd.read_csv(filename, sep=';|,', decimal=',', engine='python')                                                                     
-            dt_obj.filesize = dt_obj.df.size
-        except: #due to a different encoding some datafiles require additional processing
-            filename.seek(0)
-            filename = filename.read()
-            filename = str(filename,'utf-8')
-            filename = StringIO(filename)
             #now the standard 'read_csv' should work
-            dt_obj.df = pd.read_csv(filename, sep=';', decimal=',', index_col = False)
-            dt_obj.filesize = dt_obj.df.size
+        dt_obj.data = pd.read_csv("import_export_15000", sep=';', decimal=',', index_col = False)
+        # Data Sampling
+        dt_obj.df = pd.DataFrame.sample(dt_obj.data, n=3001, random_state=55043)
+        dt_obj.filesize = dt_obj.df.size
       
         # Side bar navigation menu with a select box
         menu = ['Welcome Page','Data Preview']
