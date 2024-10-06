@@ -1,5 +1,8 @@
 # General import section
 import streamlit as st #streamlit backend
+import seaborn as sns #for plotting
+import matplotlib.pyplot as plt #to configure plots
+
 def Heatmap(data_obj):
     """Heatmap
 
