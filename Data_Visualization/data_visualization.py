@@ -1,63 +1,116 @@
-import streamlit as st # Streamlit backend
-import seaborn as sns # For plotting
-import matplotlib.pyplot as plt # To configure plots
-import pandas as pd # To handle dataframes
+import streamlit as st
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
 
-def Heatmap(non_cat):
-    """Generates a heatmap of the correlation between numeric variables
-
-    :param non_cat: DataFrame with non-categorical columns (Quantity, Value, Weight)
-    :type non_cat: pandas.DataFrame
-    """
-    fig = plt.figure(figsize=(16, 6))
-    sns.heatmap(non_cat.corr(), annot=True, fmt='.2f').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+def top_countries_by_trade(data):
+    trade_type = st.selectbox("Select Trade Type:", options=["Export", "Import"])
+    filtered_data = data[data['Import_Export'] == trade_type]
+    top_countries = filtered_data.groupby('Country')['Total_Value'].sum().nlargest(10)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    top_countries.plot(kind='bar', color='skyblue', ax=ax)
+    ax.set_title(f'Top 10 Countries by {trade_type} Value', fontsize=14)
+    ax.set_ylabel('Trade Value')
+    ax.set_xlabel('Country')
     st.pyplot(fig)
 
-def BarGraph(data, import_export):
-    """Generates a bar graph of top 10 countries by Value
+# Plot 2: Top 10 Products by Trade - Bar Chart
+def top_products_by_trade(data):
+    top_export_prod = data[data['Import_Export'] == 'Export'].groupby('Product')['Total_Value'].sum().nlargest(10)
+    top_import_prod = data[data['Import_Export'] == 'Import'].groupby('Product')['Total_Value'].sum().nlargest(10)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    top_export_prod.plot(kind='bar', color='orange', ax=ax, label='Exported Products', position=1, width=0.4)
+    top_import_prod.plot(kind='bar', color='purple', ax=ax, label='Imported Products', position=0, width=0.4)
+    ax.set_title('Top 10 Products by Trade (Export & Import)', fontsize=14)
+    ax.set_ylabel('Trade Value')
+    ax.legend()
+    
+    st.pyplot(fig)
 
-    :param data: DataFrame of the original dataset
-    :type data: pandas.DataFrame
-    :param import_export: Filter for either Import or Export
-    :type import_export: str
-    """
-    filtered_data = data[data['Import_Export'] == import_export]
-    top_countries = filtered_data.groupby('Country')['Value'].agg(['min', 'max']).reset_index()
-
-    # Sorting by 'max' to get top 10 countries
-    top_10_countries = top_countries.sort_values(by='max', ascending=False).head(10)
+# Plot 3: Yearly Trade Volume - Violin Plot
+def yearly_trade_volume(data):
+    data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
+    data['Year'] = data['Date'].dt.year
+    data = data.dropna(subset=['Year'])
     
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_10_countries.set_index('Country')[['min', 'max']].plot(kind='bar', ax=ax)
-    ax.set_title(f'Top 10 Countries by {import_export} Value', fontsize=14)
-    ax.set_xlabel('Country')
-    ax.set_ylabel('Value')
+    sns.violinplot(x='Year', y='Quantity', hue='Import_Export', data=data, split=True, ax=ax)
+    ax.set_title('Yearly Trade Volume Distribution (2019-2024)', fontsize=14)
+    ax.set_ylabel('Quantity')
+    
+    st.pyplot(fig)
+
+# Plot 4: Shipping Costs vs Product Value - Scatter Plot
+def shipping_vs_value(data, import_export):
+    filtered_data = data[data['Import_Export'] == import_export]
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(data=filtered_data, x='Total_Value', y='Weight', hue='Shipping_Method', ax=ax)
+    ax.set_title(f'Shipping Costs vs Product Value ({import_export}s)', fontsize=14)
+    ax.set_xlabel('Product Value')
+    ax.set_ylabel('Weight (Shipping Cost Proxy)')
+    
+    st.pyplot(fig)
+
+# Plot 5: Top 10 Global Suppliers by Wealth Generated - Histogram
+def top_suppliers_by_exports(data):
+    top_suppliers = data[data['Import_Export'] == 'Export'].groupby('Supplier')['Total_Value'].sum().nlargest(10)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    top_suppliers.plot(kind='hist', bins=5, color='green', ax=ax)
+    ax.set_title('Top 10 Global Suppliers by Wealth Generated (Exports)', fontsize=14)
+    ax.set_xlabel('Total Export Value')
+    ax.set_ylabel('Frequency')
+    
+    st.pyplot(fig)
+
+# Plot 6: Preferred Payment Methods by Countries - Pie Chart
+def preferred_payment_methods(data, import_export):
+    filtered_data = data[data['Import_Export'] == import_export]
+    payment_methods = filtered_data['Payment_Terms'].value_counts().nlargest(5)
+    
+    fig, ax = plt.subplots(figsize=(6, 6))
+    payment_methods.plot(kind='pie', autopct='%1.1f%%', colors=sns.color_palette('Pastel1'), ax=ax)
+    ax.set_title(f'Preferred Payment Methods for {import_export}s', fontsize=14)
+    ax.set_ylabel('')
     
     st.pyplot(fig)
 
 def main(data_obj):
-    """Data Visualization main function
-
-    :param data_obj: DataObject instance containing the dataframe
-    :type data_obj: __main__.DataObject
-    """
-    # Create a subset of the dataframe with only numeric columns (Quantity, Value, Weight)
-    non_cat = data_obj.df[['Quantity', 'Value', 'Weight']]
-
     st.header("DATA VISUALIZATION")
 
-    # Layout for the two visualizations
+    # Layout for the visualizations
+    st.subheader("Top 10 Analytics Dashboard")
+    
     col1, col2 = st.columns(2)
-
+    
+    # Plot 1: Top 10 Countries by Trade - Bar Plot with Slicer
     with col1:
-        st.subheader("Correlation Heatmap")
-        Heatmap(non_cat)
-
+        top_countries_by_trade(data_obj.df)
+    
+    # Plot 2: Top 10 Products by Trade - Bar Chart
     with col2:
-        st.subheader("Top 10 Countries by Value")
-        # Slicer for Import or Export
-        import_export = st.selectbox("Select Import or Export", options=['Import', 'Export'])
-        BarGraph(data_obj.df, import_export)
+        top_products_by_trade(data_obj.df)
+    
+    col3, col4 = st.columns(2)
+    
+    # Plot 3: Yearly Trade Volume - Violin Plot
+    with col3:
+        yearly_trade_volume(data_obj.df)
+    
+    # Plot 4: Shipping Costs vs Product Value - Scatter Plot (Imports)
+    with col4:
+        shipping_vs_value(data_obj.df, 'Import')
+
+    col5, col6 = st.columns(2)
+
+    # Plot 5: Top 10 Global Suppliers by Exports - Histogram
+    with col5:
+        top_suppliers_by_exports(data_obj.df)
+
+    # Plot 6: Preferred Payment Methods - Pie Chart
+    with col6:
+        preferred_payment_methods(data_obj.df, 'Export')
 
 # Main execution block
 if __name__ == "__main__":
