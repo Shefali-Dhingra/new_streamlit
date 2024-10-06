@@ -56,7 +56,7 @@ class Interface():
 
       elif navigation == 'Observations':
         with st.container():
-          Observations.observations(dt_obj)
+          Observations.observations()
           
       else:
         Welcome_Page.welcome()
