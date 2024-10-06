@@ -9,7 +9,7 @@ def Heatmap(non_cat):
     :param non_cat: DataFrame with non-categorical columns (Quantity, Value, Weight)
     :type non_cat: pandas.DataFrame
     """
-    fig = plt.figure(figsize=(16, 6))
+    fig = plt.figure(figsize=(16, 16))
     sns.heatmap(non_cat.corr(), annot=True, fmt='.2f').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
     st.pyplot(fig)
 
