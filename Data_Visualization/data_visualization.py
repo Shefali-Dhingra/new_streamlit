@@ -90,13 +90,6 @@ def main(data_obj):
      with col2:
         import_export = st.selectbox("Select Import or Export", options=['Import', 'Export'])
         top_products_by_trade(data_obj.df,import_export)
-         
-    # Layout for the visualizations
-    st.subheader("Top 10 Analytics Dashboard")
-    yearly_trade_volume(data_obj.df)
-    shipping_vs_value(data_obj.df, 'Import')
-    top_suppliers_by_exports(data_obj.df)
-    preferred_payment_methods(data_obj.df, 'Export')
 
 # Main execution block
 if __name__ == "__main__":
