@@ -6,7 +6,7 @@ def main():
     """    
     st.header("Welcome to Trend Analysis Dashboard!")
     st.warning("A Random Sample of 3001 entries is taken with random state 55043")
-    st.info("""This Dashboard is Developed by Shefali Dhingra, a student of FORE School of Management for a project in DEVP""")
+    st.info("""This Dashboard is Developed by Shefali Dhingra, a student of FORE School of Management PGDM-BDA""")
     st.subheader("Navigation")
     st.markdown("""
                 1. **Data Preview:**  Gives a brief information about the Dataset
