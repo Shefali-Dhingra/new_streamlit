@@ -45,12 +45,10 @@ class Interface():
         with st.container():
          Data_Preview.data_preview(dt_obj)
 
-        # Runs 'Data Preparation' app
-      # if navigation == 'Data Visualization':
-      #   with st.container():
-      #    Visualization.visualization(dt_obj)
-      
-      # Initial welcome page when there is no file selected
+      if navigation == 'Data Preview':
+        with st.container():
+         Data_Preview.data_preview(dt_obj)
+          
       else:
         Welcome_Page.welcome()
         
