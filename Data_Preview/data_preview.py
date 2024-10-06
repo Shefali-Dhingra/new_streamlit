@@ -1,12 +1,26 @@
 # General import section
-import streamlit as st #streamlit backend
+import streamlit as st 
+import seaborn as sns 
+import matplotlib.pyplot as plt 
+import pandas as pd 
 
+def Heatmap(non_cat):
+    """Generates a heatmap of the correlation between numeric variables
+
+    :param non_cat: DataFrame with non-categorical columns (Quantity, Value, Weight)
+    :type non_cat: pandas.DataFrame
+    """
+    fig = plt.figure(figsize=(16, 6))
+    sns.heatmap(non_cat.corr(), annot=True, fmt='.2f').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    st.pyplot(fig)
+    
 def main(data_obj):
     """Data Preview main
 
     :param data_obj: DataObject instance
     :type data_obj: __main__.DataObject
     """
+    non_cat = data_obj.df[['Quantity', 'Value', 'Weight']]
     st.header("DATA INFORMATION")
     col1, col2 = st.columns(2)
     col3, col4 = st.columns(2)
@@ -21,8 +35,8 @@ def main(data_obj):
         st.dataframe(data_obj.df.describe())
     
     with col3:
-        st.subheader("Data types")
-        st.dataframe(data_obj.df.dtypes.astype(str))
+        st.subheader("Correlation Heatmap")
+        Heatmap(non_cat)
         
     with col4:
         st.subheader("Catagorical and Non-Categorical Variables")
