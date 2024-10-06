@@ -1,6 +1,7 @@
 # General import section
 import streamlit as st #streamlit backend
-
+import seaborn as sns #for plotting
+import matplotlib.pyplot as plt #to configure plots
 # Importing specific plots
 # from Visualization.visualization import Heatmap
 
@@ -16,8 +17,7 @@ def main(data_obj):
     
     with col1:
         st.subheader("Original dataframe")
-        st.dataframe(data_obj.df)
-        st.write(data_obj.df.shape)
+        st.dataframe(sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12))
         
     with col2:
         st.subheader("Dataframe description")
