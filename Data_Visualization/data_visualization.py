@@ -1,6 +1,15 @@
 # General import section
 import streamlit as st #streamlit backend
-from visualization import Heatmap
+def Heatmap(data_obj):
+    """Heatmap
+
+    :param data_obj: DataObject instance
+    :type data_obj: __main__.DataObject
+    """
+    fig = plt.figure(figsize=(16, 6))
+    sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    return st.pyplot(fig)
+    
 def main(data_obj):
     """Data Visualization main
 
@@ -12,9 +21,8 @@ def main(data_obj):
     col3, col4 = st.columns(2)
     
     with col1:
-        st.subheader("Dataframe Head and Shape")
-        st.dataframe(data_obj.df.head(10))
-        st.write(data_obj.df.shape)
+        st.subheader("Correlation heatmap")
+        Heatmap(data_obj)
         
     with col2:
         st.subheader("Dataframe description")
