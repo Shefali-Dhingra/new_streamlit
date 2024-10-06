@@ -19,7 +19,6 @@ def main():
     - Confidence in the Mean: The narrow confidence intervals suggest that, despite the variability, the estimates for the mean of each variable are fairly precise.
     - Weight's Higher Variability: While the confidence interval for weight is wider than those for quantity and value, the overall variability in weight reflects that the traded goods may have a more diverse range of weights compared to their quantities or values.
     - The variables are largely independent, with no evidence of strong direct causal relationships based on the correlation matrix.
-
     """)
     
    st.subheader("Trade Trend Analysis")
