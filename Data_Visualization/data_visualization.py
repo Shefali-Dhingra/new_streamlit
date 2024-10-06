@@ -4,27 +4,36 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Plot 1: Top 10 Countries by Trade (Export and Import Value) - Pie Chart
-def top_countries_by_trade(data,import_export):
-    filtered_data = data[data['Import_Export'] == import_export]
-    top_countries = filtered_data.groupby('Country')['Value'].agg(['min', 'max']).reset_index()
-    top_10_countries = top_countries.sort_values(by='max', ascending=False).head(10)
-    fig, ax = plt.subplots(figsize=(10, 6))
-    top_10_countries.set_index('Country')[['min', 'max']].plot(kind='bar', ax=ax)
-    ax.set_title(f'Top 10 Countries by {import_export} Value', fontsize=14)
-    ax.set_xlabel('Country')
-    ax.set_ylabel('Value')
+def top_countries_by_trade(data):
+    top_export = data[data['Import_Export'] == 'Export'].groupby('Country')['Value'].sum().nlargest(10)
+    top_import = data[data['Import_Export'] == 'Import'].groupby('Country')['Value'].sum().nlargest(10)
+    
+    fig, ax = plt.subplots(figsize=(6, 6))
+    top_export.plot(kind='pie', autopct='%1.1f%%', ax=ax, label='Export', colors=sns.color_palette('Greens', len(top_export)))
+    ax.set_title('Top 10 Countries by Export Value')
+    ax.set_ylabel('')  # Hides the 'Value' label on pie chart
+    
+    st.pyplot(fig)
+    
+    fig, ax = plt.subplots(figsize=(6, 6))
+    top_import.plot(kind='pie', autopct='%1.1f%%', ax=ax, label='Import', colors=sns.color_palette('Blues', len(top_import)))
+    ax.set_title('Top 10 Countries by Import Value')
+    ax.set_ylabel('')
+    
     st.pyplot(fig)
 
 # Plot 2: Top 10 Products by Trade - Bar Chart
-def top_products_by_trade(data,import_export):
-    filtered_data = data[data['Import_Export'] == import_export]
-    top_countries = filtered_data.groupby('Product')['Value'].agg(['min', 'max']).reset_index()
-    top_10_countries = top_countries.sort_values(by='max', ascending=False).head(10)
+def top_products_by_trade(data):
+    top_export_prod = data[data['Import_Export'] == 'Export'].groupby('Product')['Value'].sum().nlargest(10)
+    top_import_prod = data[data['Import_Export'] == 'Import'].groupby('Product')['Value'].sum().nlargest(10)
+    
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_10_countries.set_index('Product')[['min', 'max']].plot(kind='bar', ax=ax)
-    ax.set_title(f'Top 10 Countries by {import_export} Value', fontsize=14)
-    ax.set_xlabel('Product')
-    ax.set_ylabel('Value')
+    top_export_prod.plot(kind='bar', color='orange', ax=ax, label='Exported Products', position=1, width=0.4)
+    top_import_prod.plot(kind='bar', color='purple', ax=ax, label='Imported Products', position=0, width=0.4)
+    ax.set_title('Top 10 Products by Trade (Export & Import)', fontsize=14)
+    ax.set_ylabel('Total Trade Value')
+    ax.legend()
+    
     st.pyplot(fig)
 
 # Plot 3: Yearly Trade Volume - Violin Plot
@@ -81,16 +90,29 @@ def preferred_payment_methods(data, import_export):
 
 def main(data_obj):
     st.header("DATA VISUALIZATION")
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        import_export = st.selectbox("Select Import or Export", options=['Import', 'Export'])
-        top_countries_by_trade(data_obj.df,import_export)
 
-     with col2:
-        import_export = st.selectbox("Select Import or Export", options=['Import', 'Export'])
-        top_products_by_trade(data_obj.df,import_export)
+    # Layout for the visualizations
+    st.subheader("Top 10 Analytics Dashboard")
+
+    # Plot 1: Top 10 Countries by Trade - Pie Chart
+    top_countries_by_trade(data_obj.df)
+
+    # Plot 2: Top 10 Products by Trade - Bar Chart
+    top_products_by_trade(data_obj.df)
+
+    # Plot 3: Yearly Trade Volume - Violin Plot
+    yearly_trade_volume(data_obj.df)
+
+    # Plot 4: Shipping Costs vs Product Value - Scatter Plot (Imports)
+    shipping_vs_value(data_obj.df, 'Import')
+
+    # Plot 5: Top 10 Global Suppliers by Exports - Histogram
+    top_suppliers_by_exports(data_obj.df)
+
+    # Plot 6: Preferred Payment Methods - Pie Chart
+    preferred_payment_methods(data_obj.df, 'Export')
 
 # Main execution block
 if __name__ == "__main__":
    main()
+
