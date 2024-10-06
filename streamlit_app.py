@@ -46,7 +46,7 @@ class Interface():
         with st.container():
          Data_Preview.data_preview(dt_obj)
 
-      if navigation == 'Data Visualization':
+      elif navigation == 'Data Visualization':
         with st.container():
          Data_Visualization.data_visualization(dt_obj)
           
