@@ -13,6 +13,9 @@ def Heatmap(data_obj):
     sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
     return st.pyplot(fig)
     
+    # height=300
+    return heatmap
+    
 def main(data_obj):
     """Data Visualization main
 
