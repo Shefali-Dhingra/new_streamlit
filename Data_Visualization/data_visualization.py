@@ -16,15 +16,14 @@ def top_countries_by_trade(data):
 
 # Plot 2: Top 10 Products by Trade - Bar Chart
 def top_products_by_trade(data):
-    top_export_prod = data[data['Import_Export'] == 'Export'].groupby('Product')['Total_Value'].sum().nlargest(10)
-    top_import_prod = data[data['Import_Export'] == 'Import'].groupby('Product')['Total_Value'].sum().nlargest(10)
+    trade_type = st.selectbox("Select Trade Type:", options=["Export", "Import"])
+    filtered_data = data[data['Import_Export'] == trade_type]
+    top_products = filtered_data.groupby('Product')['Total_Value'].sum().nlargest(10)
     fig, ax = plt.subplots(figsize=(10, 6))
-    top_export_prod.plot(kind='bar', color='orange', ax=ax, label='Exported Products', position=1, width=0.4)
-    top_import_prod.plot(kind='bar', color='purple', ax=ax, label='Imported Products', position=0, width=0.4)
-    ax.set_title('Top 10 Products by Trade (Export & Import)', fontsize=14)
+    top_countries.plot(kind='bar', color='skyblue', ax=ax)
+    ax.set_title(f'Top 10 Countries by {trade_type} Value', fontsize=14)
     ax.set_ylabel('Trade Value')
-    ax.legend()
-    
+    ax.set_xlabel('Products')
     st.pyplot(fig)
 
 # Plot 3: Yearly Trade Volume - Violin Plot
@@ -83,32 +82,19 @@ def main(data_obj):
     st.subheader("Top 10 Analytics Dashboard")
     
     col1, col2 = st.columns(2)
+    col3, col4 = st.columns(2)
+    col5, col6 = st.columns(2)
     
-    # Plot 1: Top 10 Countries by Trade - Bar Plot with Slicer
     with col1:
         top_countries_by_trade(data_obj.df)
-    
-    # Plot 2: Top 10 Products by Trade - Bar Chart
     with col2:
         top_products_by_trade(data_obj.df)
-    
-    col3, col4 = st.columns(2)
-    
-    # Plot 3: Yearly Trade Volume - Violin Plot
     with col3:
         yearly_trade_volume(data_obj.df)
-    
-    # Plot 4: Shipping Costs vs Product Value - Scatter Plot (Imports)
     with col4:
         shipping_vs_value(data_obj.df, 'Import')
-
-    col5, col6 = st.columns(2)
-
-    # Plot 5: Top 10 Global Suppliers by Exports - Histogram
     with col5:
         top_suppliers_by_exports(data_obj.df)
-
-    # Plot 6: Preferred Payment Methods - Pie Chart
     with col6:
         preferred_payment_methods(data_obj.df, 'Export')
 
