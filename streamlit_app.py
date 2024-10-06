@@ -17,6 +17,7 @@ st.set_page_config(page_title="DEVP Dashboard",
 import Welcome_Page
 import Data_Preview
 import Data_Visualization
+import Observations
 
 # Data object class
 class DataObject():
@@ -41,7 +42,7 @@ class Interface():
       dt_obj.Non_Categorical_Variables=dt_obj.df.Quantity+dt_obj.df.Value+dt_obj.df.Weight
       
         # Side bar navigation menu with a select box
-      menu = ['Welcome Page','Data Preview','Data Visualization']
+      menu = ['Welcome Page','Data Preview','Data Visualization','Observations']
       navigation = st.sidebar.selectbox(label="Select menu", options=menu)
 
         # Runs 'Data Preview' app
@@ -52,6 +53,10 @@ class Interface():
       elif navigation == 'Data Visualization':
         with st.container():
           Data_Visualization.data_visualization(dt_obj)
+
+      elif navigation == 'Observations':
+        with st.container():
+          Observations.observations(dt_obj)
           
       else:
         Welcome_Page.welcome()
