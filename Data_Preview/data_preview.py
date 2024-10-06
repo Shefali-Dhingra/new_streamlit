@@ -18,8 +18,7 @@ def main(data_obj):
         
     with col2:
         st.subheader("Dataframe description")
-        Non_Categorical_Variables=data_obj.df['Quantity','Value','Weight']
-        st.dataframe(Non_Categorical_Variables.describe())
+        st.dataframe(data_obj.df['Quantity','Value','Weight'].describe())
     
     with col3:
         st.subheader("Data types")
