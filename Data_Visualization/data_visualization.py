@@ -10,7 +10,7 @@ def Heatmap(data_obj):
     :type data_obj: __main__.DataObject
     """
     fig = plt.figure(figsize=(16, 6))
-    sns.heatmap(data_obj.df.corr(), vmin=-1, vmax=1, annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
+    sns.heatmap(data_obj.Non_Categorical_Variables.corr(), annot=True, fmt='.2%').set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
     return st.pyplot(fig)
     
 def main(data_obj):
