@@ -43,9 +43,6 @@ class Interface():
         # Apps
 
         # Landing page
-      if navigation == 'Welcome Page':
-        with st.container():
-         Welcome_Page.welcome()
 
         # Runs 'Data Preview' app
       if navigation == 'Data Preview':
